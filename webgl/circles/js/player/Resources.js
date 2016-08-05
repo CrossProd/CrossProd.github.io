@@ -33,7 +33,7 @@ Resources.prototype = {
             gl.bindTexture(gl.TEXTURE_2D, texture);
 
             texture.internalFormat = gl.RGBA;
-            texture.formatType = gl.FLOAT;
+            texture.formatType = gl.HALF_FLOAT;
             texture.width = config.width === '*' ? Pyramid.width : config.width;
             texture.height = config.height === '*' ? Pyramid.height : config.height;
 

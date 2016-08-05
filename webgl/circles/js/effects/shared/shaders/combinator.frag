@@ -28,6 +28,8 @@ vec3 sampleColor(sampler2D texture, vec2 uv) {
 
 void main() {
     vec3 color = sampleColor(uColorTexture, vUV);
+    //vec3 color = texture2D(uColorTexture, vUV).xyz;
+//vec3 color = vec3(16.0);
 
     gl_FragColor = vec4(color.r, color.g, color.b, 1.0) * (1.0 / 16.0);
 }

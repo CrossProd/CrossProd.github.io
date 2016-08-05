@@ -169,7 +169,7 @@ Circles.prototype = Object.extend(Effect.prototype, {
         Pyramid.gl.enable(Pyramid.gl.BLEND);
         Pyramid.gl.blendFunc(Pyramid.gl.ONE, Pyramid.gl.ONE);
 
-        Pyramid.gl.clearColor(0.2, 0.1, 0.0, 1);
+        Pyramid.gl.clearColor(0.0, 0.0, 0.0, 1);
 
         Pyramid.clear();
 

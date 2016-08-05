@@ -70,6 +70,11 @@ var Pyramid = {
             return alert("Could not load 'OES_texture_float_linear' extension.");
         }
 
+        Pyramid.gl.getExtension('OES_texture_half_float');
+        Pyramid.gl.getExtension('OES_texture_half_float_linear');
+
+        Pyramid.gl.HALF_FLOAT = 0x8D61;
+
         Pyramid.gl.enable(Pyramid.gl.DEPTH_TEST);
 
         Pyramid.gl.clearDepth(0);
