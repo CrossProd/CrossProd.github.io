@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Robert Bruinier">
+    <title>JS3D</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <style>
+        html, body {
+            background: black;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mainCanvas"></canvas>
+    <script src="js/utils/Utils.js"></script>
+    <script src="js/system/Pyramid.js"></script>
+    <script src="js/system/Random.js"></script>
+    <script src="js/engine/Vector.js"></script>
+    <script src="js/engine/Matrix.js"></script>
+    <script src="js/engine/Camera.js"></script>
+    <script src="js/engine/Mesh.js"></script>
+    <script src="js/engine/Scene.js"></script>
+    <script src="js/player/Effect.js"></script>
+    <script src="js/player/Resources.js"></script>
+    <script src="js/player/Player.js"></script>
+    <script src="js/effects/shared/Canvas.js"></script>
+    <script src="js/effects/shared/DlaHelper.js"></script>
+    <script src="js/effects/test/TestEffect.js"></script>
+    <script src="js/effects/dla01/Dla01.js"></script>
+    <script src="js/effects/circles/Circles.js"></script>
+    <script>
+        Pyramid.init(document.getElementById("mainCanvas"));
+
+        Player.init(new Circles(), function() {
+           Player.play();
+        });
+
+    </script>
+</body>
+</html>
