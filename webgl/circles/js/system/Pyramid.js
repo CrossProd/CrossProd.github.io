@@ -4,6 +4,8 @@ var Pyramid = {
     extensions: {
         floatTexture: null,
         floatLinearTexture: null,
+        halfFloatTexture: null,
+        halfFloatLinearTexture: null
     },
     width: 0,
     height: 0,
@@ -35,6 +37,8 @@ var Pyramid = {
         Pyramid.canvas.height = Pyramid.height = height;
 
         Pyramid.ratio = width / height;
+
+        ResourcesBucket.resizeResources();
     },
 
     //
@@ -70,8 +74,16 @@ var Pyramid = {
             return alert("Could not load 'OES_texture_float_linear' extension.");
         }
 
-        Pyramid.gl.getExtension('OES_texture_half_float');
-        Pyramid.gl.getExtension('OES_texture_half_float_linear');
+        Pyramid.extensions.halfFloatTexture = Pyramid.gl.getExtension('OES_texture_half_float');
+        Pyramid.extensions.halfFloatLinearTexture = Pyramid.gl.getExtension('OES_texture_half_float_linear');
+
+        if (!Pyramid.extensions.halfFloatTexture) {
+            return alert("Could not load 'OES_texture_half_float' extension.");
+        }
+
+        if (!Pyramid.extensions.halfFloatLinearTexture) {
+            return alert("Could not load 'OES_texture_half_float_linear' extension.");
+        }
 
         Pyramid.gl.HALF_FLOAT = 0x8D61;
 

@@ -16,10 +16,35 @@
             width: 100%;
             margin: 0;
         }
+
+        div.info {
+            position: absolute;
+            bottom: 14px;
+            right: 14px;
+            width: 300px;
+            height: 60px;
+            background-color: black;
+            color: white;
+            opacity: 0.7;
+            font-family: "Verdana";
+            font-size: 10px;
+            padding: 4px;
+        }
+
+        a {
+            color: white;
+        }
     </style>
 </head>
 <body>
     <canvas id="mainCanvas"></canvas>
+
+    <div class="info">
+        50 rings of circles rendered 16 times per frame to achieve a naive motion blur effect. In post processing
+        some fake chromatic aberration and lens distortion is applied.<br /><br />
+        Source: <a href="https://github.com/CrossProd/CrossProd.github.io/tree/master/webgl/circles">GitHub</a>
+    </div>
+
     <script src="js/utils/Utils.js"></script>
     <script src="js/system/Pyramid.js"></script>
     <script src="js/system/Random.js"></script>

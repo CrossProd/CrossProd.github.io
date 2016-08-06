@@ -1,3 +1,47 @@
+ResourcesBucket = {
+    textures: [],
+    frameBuffers: [],
+
+    resizeResources: function() {
+        var gl = Pyramid.gl;
+
+        ResourcesBucket.textures.forEach(function(texture) {
+            var config = texture.config;
+
+            if (config.width === '*' || config.height === '*') {
+                gl.bindTexture(gl.TEXTURE_2D, texture);
+
+                texture.width = config.width === '*' ? Pyramid.width : config.width;
+                texture.height = config.height === '*' ? Pyramid.height : config.height;
+
+                gl.texImage2D(gl.TEXTURE_2D, 0, texture.internalFormat, texture.width, texture.height, 0, texture.internalFormat, texture.formatType, null);
+
+                console.log("Resized texture to: " + texture.width + ' x ' + texture.height);
+
+                gl.bindTexture(gl.TEXTURE_2D, null);
+            }
+        });
+
+        ResourcesBucket.frameBuffers.forEach(function(frameBuffer) {
+            var config = frameBuffer.config;
+
+            if (config.width === '*' || config.height === '*') {
+                gl.bindFramebuffer(gl.FRAMEBUFFER, frameBuffer);
+
+                frameBuffer.width = config.width === '*' ? Pyramid.width : config.width;
+                frameBuffer.height = config.width === '*' ? Pyramid.height : config.height;
+
+                var i = 0;
+                frameBuffer.textures.forEach(function (texture) {
+                    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0 + i, gl.TEXTURE_2D, texture, 0);
+
+                    i++;
+                });
+            }
+        });
+    }
+};
+
 function Resources(config) {
     this.config = config;
 
@@ -36,7 +80,7 @@ Resources.prototype = {
             texture.formatType = gl.HALF_FLOAT;
             texture.width = config.width === '*' ? Pyramid.width : config.width;
             texture.height = config.height === '*' ? Pyramid.height : config.height;
-
+            texture.config = config;
 
             gl.texImage2D(gl.TEXTURE_2D, 0, texture.internalFormat, texture.width, texture.height, 0, texture.internalFormat, texture.formatType, null);
 
@@ -65,6 +109,8 @@ Resources.prototype = {
             }
 
             gl.bindTexture(gl.TEXTURE_2D, null);
+
+            ResourcesBucket.textures.push(texture);
 
             this.textures[key] = texture;
 
@@ -102,6 +148,9 @@ Resources.prototype = {
 
             frameBuffer.width = config.width === '*' ? Pyramid.width : config.width;
             frameBuffer.height =  config.width === '*' ? Pyramid.height : config.height;
+            frameBuffer.config = config;
+
+            ResourcesBucket.frameBuffers.push(frameBuffer);
 
             this.framebuffers[key] = frameBuffer;
 
